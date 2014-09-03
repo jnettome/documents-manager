@@ -46,5 +46,7 @@ module OdontoFiles
     config.i18n.default_locale = :'pt-BR'
     config.i18n.locale = :'pt-BR'
 
+    config.middleware.use Rack::Deflater
+
   end
 end
