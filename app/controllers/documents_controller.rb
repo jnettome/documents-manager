@@ -1,10 +1,13 @@
 class DocumentsController < ApplicationController
   before_action :set_document, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
+
+  before_action :restrict_access, only: [:edit, :update, :destroy, :new, :create]
 
   # GET /documents
   # GET /documents.json
   def index
-    @documents = Document.all
+    @documents = user_documents.all
   end
 
   # GET /documents/1
@@ -14,7 +17,7 @@ class DocumentsController < ApplicationController
 
   # GET /documents/new
   def new
-    @document = Document.new
+    @document = user_documents.new
   end
 
   # GET /documents/1/edit
@@ -24,7 +27,7 @@ class DocumentsController < ApplicationController
   # POST /documents
   # POST /documents.json
   def create
-    @document = Document.new(document_params)
+    @document = user_documents.new(document_params)
 
     respond_to do |format|
       if @document.save
@@ -64,11 +67,25 @@ class DocumentsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_document
-      @document = Document.find(params[:id])
+      @document = user_documents.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def document_params
       params.require(:document).permit(:user_id, :file)
+    end
+
+    def user_documents
+      if current_user.email == 'hi@joaonetto.me'
+        Document
+      else
+        current_user.documents
+      end
+    end
+
+    def restrict_access
+      return if current_user.is_admin?
+      flash[:error] = 'Você não tem permissão para realizar esta operação'
+      redirect_to documents_path
     end
 end

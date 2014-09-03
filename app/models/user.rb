@@ -9,4 +9,8 @@ class User < ActiveRecord::Base
   def to_s
     email
   end
+
+  def is_admin?
+    email == 'hi@joaonetto.me'
+  end
 end

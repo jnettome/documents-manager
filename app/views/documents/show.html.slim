@@ -7,6 +7,12 @@ p
   strong File:
   = @document.file
 
+p
+  a href="#{@document.file}" Ver Arquivo / Baixar
+
+br/
+br/
+
 = link_to 'Edit', edit_document_path(@document)
 '|
 = link_to 'Back', documents_path

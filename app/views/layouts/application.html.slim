@@ -18,5 +18,14 @@ html lang="en"
       script src="http://html5shim.googlecode.com/svn/trunk/html5.js"
 
   body class=body_class
-    = render 'flash_messages'
-    = yield
+    .container
+      = render 'flash_messages'
+      .navigation
+        -if user_signed_in?
+          = link_to('Logout', destroy_user_session_path, :method => :delete)
+        - else
+           = link_to('Login', new_user_session_path)
+      br/
+      br/
+
+      = yield
