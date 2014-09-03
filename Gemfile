@@ -19,6 +19,12 @@ gem 'neat',                   '1.5.1'
 gem 'bitters',                '0.10.0'
 gem 'refills',                '0.0.2'
 
+gem 'bootstrap-sass',         '~> 3.2.0'
+gem 'autoprefixer-rails'
+
+gem 'devise'
+gem 'carrierwave'
+
 group :production, :staging do
   gem 'rails_12factor',       '0.0.2'
   gem 'rack-canonical-host',  '0.1.0'

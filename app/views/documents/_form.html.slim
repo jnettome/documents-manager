@@ -1,0 +1,10 @@
+= simple_form_for(@document, html: { multipart: true }) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.association :user
+    = f.input :file
+    = f.hidden_field :file_cache
+
+  .form-actions
+    = f.button :submit

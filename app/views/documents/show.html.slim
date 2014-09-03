@@ -1,0 +1,12 @@
+p#notice = notice
+
+p
+  strong User:
+  = @document.user
+p
+  strong File:
+  = @document.file
+
+= link_to 'Edit', edit_document_path(@document)
+'|
+= link_to 'Back', documents_path
