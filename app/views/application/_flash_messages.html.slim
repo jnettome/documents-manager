@@ -1,3 +1,8 @@
-- flash.each do |key, value|
-  div id="flash_#{key}"
-    = value
+- if flash[:warn] || flash[:alert]
+  .alert.alert-info #{flash[:warn]} #{flash[:alert]}
+- if flash[:notice] || flash[:success]
+  .alert.alert-success #{flash[:notice]} #{flash[:success]}
+- if flash[:info]
+  .alert.alert-info #{flash[:info]}
+- if flash[:error]
+  .alert.alert-error #{flash[:error]}

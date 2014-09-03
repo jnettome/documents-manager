@@ -1,18 +1,26 @@
-p#notice = notice
+h1.page-header
+  | Document
 
-p
-  strong User:
-  = @document.user
-p
-  strong File:
+- if current_user.is_admin?
+  p.lead
+    h4 User
+    = @document.user
+
+p.lead
+  h4 File:
   = @document.file
 
+br/
+br/
+
 p
-  a href="#{@document.file}" Ver Arquivo / Baixar
+  = link_to raw('<span class=" glyphicon glyphicon-floppy-save"></span> Baixar Arquivo'), @document.file.url, class: 'btn btn-success btn-lg'
 
 br/
 br/
+hr/
 
-= link_to 'Edit', edit_document_path(@document)
-'|
-= link_to 'Back', documents_path
+- if current_user.is_admin?
+  = link_to 'Edit', edit_document_path(@document), class: 'btn btn-primary'
+  ' &nbsp;
+= link_to 'Back', documents_path, class: 'btn btn-info'

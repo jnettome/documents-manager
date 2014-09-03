@@ -1,23 +1,26 @@
-h1 Listing documents
+h1.page-header
+  'My Documents
+  - if current_user.is_admin?
+    = link_to 'Upload File', new_document_path, class: 'btn btn-success btn-sm'
 
-table
+table.table.table-striped.table-responsive
   thead
     tr
-      th User
-      th File
-      th
-      th
-      th
+      - if current_user.is_admin?
+        th User Email
+      th Document
+      - if current_user.is_admin?
+        th
 
   tbody
     - @documents.each do |document|
       tr
-        td = document.user
-        td = document.file
-        td = link_to 'Show', document
-        td = link_to 'Edit', edit_document_path(document)
-        td = link_to 'Destroy', document, data: {:confirm => 'Are you sure?'}, :method => :delete
+        - if current_user.is_admin?
+          td = document.user
+        td = link_to document.file, document
+        - if current_user.is_admin?
+          td.text-right
+            .btn-group
+              = link_to 'Edit', edit_document_path(document), class: 'btn btn-primary'
+              = link_to raw('<span class="glyphicon glyphicon-remove"></span>'), document, data: {:confirm => 'Are you sure?'}, :method => :delete, class: 'btn btn-danger'
 
-br
-
-= link_to 'New Document', new_document_path
