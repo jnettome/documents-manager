@@ -64,6 +64,13 @@ class DocumentsController < ApplicationController
     end
   end
 
+  def download_file
+    @document = user_documents.find(params[:id])
+    send_file(@document.file.path,
+      :disposition => 'attachment',
+      :url_based_filename => false)
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_document
@@ -85,7 +92,7 @@ class DocumentsController < ApplicationController
 
     def restrict_access
       return if current_user.is_admin?
-      flash[:error] = 'Você não tem permissão para realizar esta operação'
+      flash[:error] = 'You don\'t have permission.'
       redirect_to documents_path
     end
 end

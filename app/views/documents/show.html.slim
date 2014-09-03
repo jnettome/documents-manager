@@ -14,7 +14,7 @@ br/
 br/
 
 p
-  = link_to raw('<span class=" glyphicon glyphicon-floppy-save"></span> Baixar Arquivo'), @document.file.url, class: 'btn btn-success btn-lg'
+  = link_to raw('<span class=" glyphicon glyphicon-floppy-save"></span> Baixar Arquivo'), download_file_path(id: @document.id), class: 'btn btn-success btn-lg'
 
 br/
 br/
